@@ -103,7 +103,8 @@ void draw() {
   //移動
   orbRx = limRx + add;
   orbLx = limLx + add;
-
+  
+  //移動の制限
   if (orbRx > 0) {
     orbRx= 0;
     orbLx =  orbRx + 400;
@@ -118,7 +119,7 @@ void draw() {
   stroke(255, 0, 0);
   line(orbRx, 0, orbLx, 0);
 
-  //移動した範囲での軌道範囲
+  //移動した範囲での振幅範囲
   stroke(0, 0, 255);
 
   vel = (calcx - calcxPre)/step;
@@ -155,6 +156,8 @@ void draw() {
   //println(orbRx + " , "+ orbLx + " , "+ (orbRx+orbLx)/2 + " , "+ calcx + " , " + add + " , "+ x0 + " , "+ preBoll);
   //stroke(0, 255, 0);
   //line(preBoll, -60, preBoll, 60);
+  
+  //描画
   stroke(100, 100, 100);
   fill(50, 50, 50);
   ellipse(preBoll, 0, 20, 20);
@@ -177,12 +180,14 @@ void draw() {
   noStroke();
   //println(add);
   
+  //目隠し
   if(block){
     fill(0);
     rect(-500, -50, 1000, 100);
   }
   popMatrix();
-  delay(10);
+  
+  //delay(10);
 }
 
 void mouseReleased(){
@@ -193,7 +198,7 @@ void mouseReleased(){
  x0 = calcx;
  v0 = vel;
  count = 0;
- preBoll = calcx + add ;
+ preBoll = calcx + add - diff;
  x0 = preBoll;
  
  println(add +" , "+ calcx +" , "+ center +" , "+ diff +" , "+ vel +" , "+ preBoll);
